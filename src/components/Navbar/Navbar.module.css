@@ -1,0 +1,9 @@
+.navbar {
+  grid-area: n;
+  background: yellow;
+  padding: 20px;
+}
+
+.active {
+  color: red;
+}

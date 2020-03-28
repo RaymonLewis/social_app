@@ -1,15 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter as Router} from "react-router-dom";
 import App from './App';
+import { store, addPost } from './redux/store';
+
+
+import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const state = store.getState();
+
+const AppContainer = {
+  render: function(state) {
+    ReactDOM.render(
+      <React.StrictMode>
+        <Router>
+          <App state={state} addPost={addPost} />
+        </Router>
+      </React.StrictMode>,
+      document.getElementById('root')
+    );
+  },
+  update: function() {
+    this.render(state)
+  }
+};
+
+//Initial render
+AppContainer.render(state);
+
+//Subscribe component for updates from the store. It will be notified when the state is changed
+store.subscribe(AppContainer);
+
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
