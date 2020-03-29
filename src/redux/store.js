@@ -1,6 +1,5 @@
-//Action types help avoiding typos when you provide the action name for action creator
-const ADD_POST = 'ADD_POST';
-const ADD_MESSAGE = 'ADD_MESSAGE';
+import profileReducer from "./profile_reducer";
+import dialogsReducer from "./dialogs_reducer";
 
 const store = {
   _state: {
@@ -41,55 +40,12 @@ const store = {
     });
   },
   dispatch: function(action) {
-    switch (action.type) {
-      case ADD_POST:
-        const newPost = {
-          id: 1212121,
-          message: action.data,
-          likesCount: 0
-        };
-        this._state.profilePageData.postsData.push(newPost);
-        //Send notification to all observers after the state changed.
-        this.notify(this._state);
-        break;
-      case ADD_MESSAGE:
-        console.log('Inside Add Message Action');
-        console.log(action.data);
-        //Create a new message object containing the message sent by the UI component via the action provided to dispatch function
-        const newMessage = {
-          id: 123,
-          message: action.data
-        };
-        //Add newly created message to our messagesData array inside the private variable state
-        this._state.dialogsPageData.messagesData.push(newMessage);
-        //Send notificitation to all subscribers so they can change the interface accordingly to the new data
-        this.notify(this._state);
-        break;
-      default:
-        break;
-    }
+    // Using reducer functions to break down the complex logic of changing the state into a smaller pieces.
+    this._state.profilePageData = profileReducer(this._state.profilePageData, action);
+    this._state.dialogsPageData = dialogsReducer(this._state.dialogsPageData, action);
+    //Notify all of the subscribers, that the data was changed so that they can update layout.
+    this.notify(this._state);
   }
 };
 
-//Action Creators
-const addPostActionCreator = (data) => {
-  const action = {
-    type: ADD_POST,
-    data: data
-  };
-  return action;
-}
-
-const addMessageActionCreator = (data) => {
-  const action = {
-    type: ADD_MESSAGE,
-    data: data
-  }
-  return action;
-}
-
-export {
-  store, 
-  addPostActionCreator, 
-  addMessageActionCreator
-};
+export default store;

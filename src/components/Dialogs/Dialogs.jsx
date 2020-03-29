@@ -1,7 +1,7 @@
 import React from 'react';
 import Message from './Message/Message';
 import Dialog from './Dialog/Dialog';
-import { addMessageActionCreator } from '../../redux/store';
+import { addMessageActionCreator } from '../../redux/action_creators';
 
 import style from './Dialogs.module.css';
 

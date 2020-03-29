@@ -1,8 +1,7 @@
 import React from 'react';
 import Post from '../Post/Post';
 import style from './Posts.module.css';
-import {addPostActionCreator} from '../../../redux/store';
-
+import { addPostActionCreator } from '../../../redux/action_creators';
 
 const Posts = ({ postsData, dispatch }) => {
   const postList = postsData.map(({ id,message,likesCount }) => {
