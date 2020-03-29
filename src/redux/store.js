@@ -1,4 +1,6 @@
+//Action types help avoiding typos when you provide the action name for action creator
 const ADD_POST = 'ADD_POST';
+const ADD_MESSAGE = 'ADD_MESSAGE';
 
 const store = {
   _state: {
@@ -40,7 +42,7 @@ const store = {
   },
   dispatch: function(action) {
     switch (action.type) {
-      case 'ADD_NEW_POST':
+      case ADD_POST:
         const newPost = {
           id: 1212121,
           message: action.data,
@@ -50,12 +52,26 @@ const store = {
         //Send notification to all observers after the state changed.
         this.notify(this._state);
         break;
+      case ADD_MESSAGE:
+        console.log('Inside Add Message Action');
+        console.log(action.data);
+        //Create a new message object containing the message sent by the UI component via the action provided to dispatch function
+        const newMessage = {
+          id: 123,
+          message: action.data
+        };
+        //Add newly created message to our messagesData array inside the private variable state
+        this._state.dialogsPageData.messagesData.push(newMessage);
+        //Send notificitation to all subscribers so they can change the interface accordingly to the new data
+        this.notify(this._state);
+        break;
       default:
         break;
     }
   }
 };
 
+//Action Creators
 const addPostActionCreator = (data) => {
   const action = {
     type: ADD_POST,
@@ -64,4 +80,16 @@ const addPostActionCreator = (data) => {
   return action;
 }
 
-export {store, addPostActionCreator};
+const addMessageActionCreator = (data) => {
+  const action = {
+    type: ADD_MESSAGE,
+    data: data
+  }
+  return action;
+}
+
+export {
+  store, 
+  addPostActionCreator, 
+  addMessageActionCreator
+};

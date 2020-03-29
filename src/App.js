@@ -23,7 +23,7 @@ const App = ({ state, dispatch }) => {
           render={() => <Profile state={profilePageData} dispatch={dispatch} />} />
           <Route 
           exact path='/dialogs' 
-          render={() => <Dialogs state={dialogsPageData} />} />
+          render={() => <Dialogs state={dialogsPageData} dispatch={dispatch} />} />
         </Switch>
       </div>
     </div>
