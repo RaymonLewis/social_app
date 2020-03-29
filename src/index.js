@@ -2,20 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router} from "react-router-dom";
 import App from './App';
-import { store, addPost } from './redux/store';
+import { store } from './redux/store';
 
 
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 const state = store.getState();
+const dispatch = store.dispatch.bind(store);
 
 const AppContainer = {
   render: function(state) {
     ReactDOM.render(
       <React.StrictMode>
         <Router>
-          <App state={state} addPost={addPost} />
+          <App state={state} dispatch={dispatch} />
         </Router>
       </React.StrictMode>,
       document.getElementById('root')

@@ -1,3 +1,5 @@
+const ADD_POST = 'ADD_POST';
+
 const store = {
   _state: {
     dialogsPageData: {
@@ -21,21 +23,6 @@ const store = {
     }
   },
   _observers: [],
-  setState: function(type, data) {
-    switch (type) {
-      case 'ADD_NEW_POST':
-        const newPost = data;
-        const posts = this._state.profilePageData.postsData;
-        const newPostsList = [...posts, newPost];
-        this._state.profilePageData.postsData = newPostsList;
-        console.log('New Post Was Added to the state. We need to notify subscribers');
-        //Send notification to all observers after the state changed.
-        this.notify(this._state);
-        break;
-      default:
-        break;
-    };
-  },
   getState: function() {
     return this._state;
   },
@@ -50,16 +37,31 @@ const store = {
       observer.update(data);
       console.log('Observer was notified');
     });
+  },
+  dispatch: function(action) {
+    switch (action.type) {
+      case 'ADD_NEW_POST':
+        const newPost = {
+          id: 1212121,
+          message: action.data,
+          likesCount: 0
+        };
+        this._state.profilePageData.postsData.push(newPost);
+        //Send notification to all observers after the state changed.
+        this.notify(this._state);
+        break;
+      default:
+        break;
+    }
   }
 };
 
-const addPost = (text) => {
-  const newPost = {
-    id: 1212121,
-    message: text,
-    likesCount: 0
+const addPostActionCreator = (data) => {
+  const action = {
+    type: ADD_POST,
+    data: data
   };
-  store.setState('ADD_NEW_POST', newPost);
-};
+  return action;
+}
 
-export { store, addPost };
+export {store, addPostActionCreator};

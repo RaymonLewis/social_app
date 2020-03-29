@@ -6,7 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
 
-const App = ({ state, addPost }) => {
+const App = ({ state, dispatch }) => {
   const {
     dialogsPageData,
     profilePageData,
@@ -20,7 +20,7 @@ const App = ({ state, addPost }) => {
         <Switch>
           <Route 
           exact path='/profile' 
-          render={() => <Profile state={profilePageData} addPost={addPost} />} />
+          render={() => <Profile state={profilePageData} dispatch={dispatch} />} />
           <Route 
           exact path='/dialogs' 
           render={() => <Dialogs state={dialogsPageData} />} />

@@ -1,9 +1,10 @@
 import React from 'react';
 import Post from '../Post/Post';
 import style from './Posts.module.css';
+import {addPostActionCreator} from '../../../redux/store';
 
 
-const Posts = ({ postsData, addPost }) => {
+const Posts = ({ postsData, dispatch }) => {
   const postList = postsData.map(({ id,message,likesCount }) => {
     return (
       <Post id={id} message={message} likesCount={likesCount} />
@@ -13,8 +14,9 @@ const Posts = ({ postsData, addPost }) => {
   const textAreaRef = React.createRef();
 
   const addNewPost = () => {
-    let text = textAreaRef.current.value;
-    addPost(text);
+    const text = textAreaRef.current.value;
+    const postAction = addPostActionCreator(text);
+    dispatch(postAction);
     textAreaRef.current.value = '';
   }
 
