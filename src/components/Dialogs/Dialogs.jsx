@@ -5,6 +5,7 @@ import { addMessageActionCreator } from '../../redux/action_creators';
 
 import style from './Dialogs.module.css';
 
+
 const Dialogs = ({ state, dispatch }) =>  {
   const { 
     dialogsData, 

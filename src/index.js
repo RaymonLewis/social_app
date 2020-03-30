@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router} from "react-router-dom";
 import App from './App';
-import store from './redux/store';
+import store from './redux/redux_store';
 
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -10,27 +10,26 @@ import * as serviceWorker from './serviceWorker';
 const state = store.getState();
 const dispatch = store.dispatch.bind(store);
 
-const AppContainer = {
-  render: function(state) {
-    ReactDOM.render(
-      <React.StrictMode>
-        <Router>
-          <App state={state} dispatch={dispatch} />
-        </Router>
-      </React.StrictMode>,
-      document.getElementById('root')
-    );
-  },
-  update: function() {
-    this.render(state)
-  }
+const AppContainer = (state, dispatch) => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <Router>
+        <App state={state} dispatch={dispatch} />
+      </Router>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
 };
-
 //Initial render
-AppContainer.render(state);
-
+AppContainer(state,dispatch);
+//Function to be called when the state is changed. We may provide a select function to watch for the particular
+// part of the store
+const observeStore = () => {
+  const state = store.getState();
+  AppContainer(state, dispatch);
+}
 //Subscribe component for updates from the store. It will be notified when the state is changed
-store.subscribe(AppContainer);
+store.subscribe(observeStore);
 
 
 
