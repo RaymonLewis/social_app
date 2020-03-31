@@ -1,9 +1,12 @@
 import React from 'react';
 import Message from './Message/Message';
 import Dialog from './Dialog/Dialog';
-import { addMessageActionCreator } from '../../redux/action_creators';
+import { addMessageActionCreator } from '../../redux/action_creators'
 
 import style from './Dialogs.module.css';
+
+import storeObserver from '../../redux/store_observer';
+
 
 
 const Dialogs = ({ state, dispatch }) =>  {
@@ -11,12 +14,14 @@ const Dialogs = ({ state, dispatch }) =>  {
     dialogsData, 
     messagesData,
   } = state;
-  
+
   const dialogList = dialogsData.map(({ id, name }) => {
     return (
       <Dialog id={id} name={name} key={id} />
     );
   });
+  
+  storeObserver();
 
   const messageList = messagesData.map(({ id, message }) => {
     return (
