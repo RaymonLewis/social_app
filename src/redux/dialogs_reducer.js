@@ -21,7 +21,6 @@ const dialogsReducer = (state = dialogsPageData, action) => {
         message: action.data,
       };
       state.messagesData.push(newMessage);
-      console.log(state);
       return state; 
     default:
       return state;

@@ -1,9 +1,8 @@
 import React from 'react';
 import Post from '../Post/Post';
 import style from './Posts.module.css';
-import { addPostActionCreator } from '../../../redux/action_creators';
 
-const Posts = ({ postsData, dispatch }) => {
+const Posts = ({ postsData, addPost }) => {
   const postList = postsData.map(({ id,message,likesCount }) => {
     return (
       <Post id={id} message={message} likesCount={likesCount} />
@@ -12,11 +11,10 @@ const Posts = ({ postsData, dispatch }) => {
 
   const textAreaRef = React.createRef();
 
-  const addNewPost = () => {
+  const onAddPost = () => {
     const text = textAreaRef.current.value;
-    const postAction = addPostActionCreator(text);
-    dispatch(postAction);
-    textAreaRef.current.value = '';
+    addPost(text);
+    textAreaRef.current.value='';
   }
 
   return (
@@ -25,7 +23,7 @@ const Posts = ({ postsData, dispatch }) => {
         my posts
         <div className={style.commentForm}>
           <textarea ref={textAreaRef}></textarea>
-          <button onClick={addNewPost}>Add Post</button>
+          <button onClick={onAddPost}>Add Post</button>
         </div>
       </div>
       <div>

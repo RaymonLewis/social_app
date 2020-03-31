@@ -4,14 +4,9 @@ import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
-const App = ({ state, dispatch }) => {
-  const {
-    dialogsPageData,
-    profilePageData,
-  } = state;
-
+const App = ({ store }) => {
   return (
     <div className="app-wrapper">
       <Header />
@@ -20,10 +15,10 @@ const App = ({ state, dispatch }) => {
         <Switch>
           <Route 
           exact path='/profile' 
-          render={() => <Profile state={profilePageData} dispatch={dispatch} />} />
+          render={() => <Profile store={store} />} />
           <Route 
           exact path='/dialogs' 
-          render={() => <Dialogs state={dialogsPageData} dispatch={dispatch} />} />
+          render={() => <DialogsContainer store={store} />} />
         </Switch>
       </div>
     </div>

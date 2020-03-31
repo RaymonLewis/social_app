@@ -1,27 +1,15 @@
 import React from 'react';
 import Message from './Message/Message';
 import Dialog from './Dialog/Dialog';
-import { addMessageActionCreator } from '../../redux/action_creators'
 
 import style from './Dialogs.module.css';
 
-import storeObserver from '../../redux/store_observer';
-
-
-
-const Dialogs = ({ state, dispatch }) =>  {
-  const { 
-    dialogsData, 
-    messagesData,
-  } = state;
-
+const Dialogs = ({ addMessage, dialogsData, messagesData }) =>  {
   const dialogList = dialogsData.map(({ id, name }) => {
     return (
       <Dialog id={id} name={name} key={id} />
     );
   });
-  
-  storeObserver();
 
   const messageList = messagesData.map(({ id, message }) => {
     return (
@@ -31,14 +19,11 @@ const Dialogs = ({ state, dispatch }) =>  {
 
   const messageBox = React.createRef();
 
-  const addMessage = () => {
+  const onAddMessage = () => {
     const messageText = messageBox.current.value;
-    //Create action object. Now we need to provide it to the dispatch function, that can directly communicate with the store
-    const actionObject = addMessageActionCreator(messageText);
-    //Provide the action object to the callback function of the store called dispatch. It will handle the logic of updating the state
-    dispatch(actionObject);
+    addMessage(messageText)
     messageBox.current.value = '';
-  }
+  };
  
   return (
     <div className={style.dialogs}>
@@ -48,7 +33,7 @@ const Dialogs = ({ state, dispatch }) =>  {
       <div className={style.messages}>
         {messageList}
         <textarea ref={messageBox}></textarea>
-        <button onClick={addMessage}>Add Message</button>
+        <button onClick={onAddMessage}>Add Message</button>
       </div>
     </div>
   )
