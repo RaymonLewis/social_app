@@ -1,15 +1,12 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import { StoreContext } from './StoreContext';
 
 const App = () => {
-  const store = useContext(StoreContext);
-
   return (
     <div className="app-wrapper">
       <Header />
@@ -18,10 +15,10 @@ const App = () => {
         <Switch>
           <Route 
           exact path='/profile' 
-          render={() => <Profile store={store} />} />
+          render={() => <Profile />} />
           <Route 
           exact path='/dialogs' 
-          render={() => <DialogsContainer store={store} />} />
+          render={() => <DialogsContainer />} />
         </Switch>
       </div>
     </div>

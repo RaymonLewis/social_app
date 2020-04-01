@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Dialogs from './Dialogs';
 import { addMessageActionCreator } from '../../redux/action_creators';
+import { StoreContext } from '../../StoreContext';
 
-const DialogsContainer = ({ store }) => {
+const DialogsContainer = () => {
+  const store = useContext(StoreContext);
   const state = store.getState();
   const dialogsData = state.dialogsPageData.dialogsData;
   const messagesData = state.dialogsPageData.messagesData;
