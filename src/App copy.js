@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
@@ -7,9 +7,8 @@ import Profile from './components/Profile/Profile';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import { StoreContext } from './StoreContext';
 
-const App = () => {
-  const store = useContext(StoreContext);
-
+const App = (props) => {
+  debugger;
   return (
     <div className="app-wrapper">
       <Header />
