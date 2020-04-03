@@ -5,6 +5,7 @@ import Dialog from './Dialog/Dialog';
 import style from './Dialogs.module.css';
 
 const Dialogs = ({ addMessage, dialogsData, messagesData }) =>  {
+  console.log(addMessage);
   const dialogList = dialogsData.map(({ id, name }) => {
     return (
       <Dialog id={id} name={name} key={id} />

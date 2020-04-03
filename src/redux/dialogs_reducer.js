@@ -14,14 +14,19 @@ const dialogsPageData = {
 };
 
 const dialogsReducer = (state = dialogsPageData, action) => {
+  debugger
   switch (action.type) {
     case ADD_MESSAGE:
       const newMessage = {
         id: '2312312',
         message: action.data,
       };
-      state.messagesData.push(newMessage);
-      return state; 
+      //Creating a copy of the object so we DO NOT CHANGE the original object. When the state receives a NEW object it will
+      //send updates to the subscribed elements via map state to props 
+      return {
+        ...state,
+        messagesData: [...state.messagesData, newMessage]
+      }; 
     default:
       return state;
   }

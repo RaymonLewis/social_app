@@ -5,8 +5,9 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import Users from './components/Users/Users';
 
-const App = ({ store }) => {
+const App = () => {
   return (
     <div className="app-wrapper">
       <Header />
@@ -15,10 +16,13 @@ const App = ({ store }) => {
         <Switch>
           <Route 
           exact path='/profile' 
-          render={() => <Profile store={store} />} />
+          render={() => <Profile />} />
           <Route 
           exact path='/dialogs' 
-          render={() => <DialogsContainer store={store} />} />
+          render={() => <DialogsContainer />} />
+          <Route 
+          exact path='/users' 
+          render={() => <Users />} />
         </Switch>
       </div>
     </div>
