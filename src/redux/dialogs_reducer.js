@@ -14,7 +14,6 @@ const dialogsPageData = {
 };
 
 const dialogsReducer = (state = dialogsPageData, action) => {
-  debugger
   switch (action.type) {
     case ADD_MESSAGE:
       const newMessage = {
