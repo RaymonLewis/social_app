@@ -1,7 +1,10 @@
-import { TOGGLE_FOLLOW, SET_USERS } from "./action_types";
+import { TOGGLE_FOLLOW, SET_USERS, SET_TOTAL_USERS_COUNT, SET_CURRENT_PAGE } from "./action_types";
 
 const usersPageData = {
-  users: []
+  users: [],
+  pageSize: 5,
+  totalUsersCount: 0,
+  currentPage: 1
 };
  
 const usersReducer = (state = usersPageData, action) => {
@@ -9,7 +12,7 @@ const usersReducer = (state = usersPageData, action) => {
     case SET_USERS:
       return {
         ...state,
-        users: [...state.users, ...action.payload] 
+        users: [...action.users]
       };
     case TOGGLE_FOLLOW:
       const userID = action.payload;
@@ -20,6 +23,16 @@ const usersReducer = (state = usersPageData, action) => {
         return user
       });
       return {...state, users: users};
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.pageNumber
+      }
+    case SET_TOTAL_USERS_COUNT:
+      return {
+        ...state,
+        totalUsersCount: action.totalUsersCount
+      }
     default:
       return state;
   }

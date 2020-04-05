@@ -35,3 +35,18 @@ img {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.pagination {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.paginationItem {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.selectedPage {
+  margin-right: 5px;
+  font-weight: bold;
+}
