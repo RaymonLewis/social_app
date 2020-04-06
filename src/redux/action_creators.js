@@ -4,7 +4,9 @@ import {
   TOGGLE_FOLLOW, 
   SET_USERS, 
   SET_TOTAL_USERS_COUNT,
-  SET_CURRENT_PAGE } from "./action_types";
+  SET_CURRENT_PAGE,
+  TOGGLE_IS_FETCHING 
+} from "./action_types";
 
 /**
  Action creators aren't a mandatory. They are small helpers to create the action object that will be later sent to the 
@@ -31,14 +33,16 @@ const addMessageActionCreator = (data) => {
 // Make them fit in one line
 const toggleFollowUserAC = (userID) => ({type: TOGGLE_FOLLOW, payload: userID});
 const setUsersAC = (users) => ({type: SET_USERS, users: users});
-const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount})
-const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber});
+const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount})
+const setCurrentPageAC = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber});
+const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
 
 export {
   addPostActionCreator,
   addMessageActionCreator,
   toggleFollowUserAC,
   setUsersAC,
-  setTotalUsersCount,
-  setCurrentPage
+  setTotalUsersCountAC,
+  setCurrentPageAC,
+  toggleIsFetchingAC
 };

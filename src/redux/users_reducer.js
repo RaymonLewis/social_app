@@ -1,10 +1,17 @@
-import { TOGGLE_FOLLOW, SET_USERS, SET_TOTAL_USERS_COUNT, SET_CURRENT_PAGE } from "./action_types";
+import { 
+  TOGGLE_FOLLOW, 
+  SET_USERS, 
+  SET_TOTAL_USERS_COUNT, 
+  SET_CURRENT_PAGE, 
+  TOGGLE_IS_FETCHING 
+} from "./action_types";
 
 const usersPageData = {
   users: [],
   pageSize: 5,
   totalUsersCount: 0,
-  currentPage: 1
+  currentPage: 1,
+  isFetching: true
 };
  
 const usersReducer = (state = usersPageData, action) => {
@@ -32,6 +39,11 @@ const usersReducer = (state = usersPageData, action) => {
       return {
         ...state,
         totalUsersCount: action.totalUsersCount
+      }
+    case TOGGLE_IS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.isFetching
       }
     default:
       return state;
