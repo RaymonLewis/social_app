@@ -5,7 +5,8 @@ import {
   SET_USERS, 
   SET_TOTAL_USERS_COUNT,
   SET_CURRENT_PAGE,
-  TOGGLE_IS_FETCHING 
+  TOGGLE_IS_FETCHING,
+  SET_USER_PROFILE 
 } from "./action_types";
 
 /**
@@ -31,18 +32,20 @@ const addMessageActionCreator = (data) => {
 };
 
 // Make them fit in one line
-const toggleFollowUserAC = (userID) => ({type: TOGGLE_FOLLOW, payload: userID});
-const setUsersAC = (users) => ({type: SET_USERS, users: users});
-const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount})
-const setCurrentPageAC = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber});
-const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
+const toggleFollowUser = (userID) => ({type: TOGGLE_FOLLOW, payload: userID});
+const setUsers = (users) => ({type: SET_USERS, users: users});
+const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount})
+const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber});
+const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
+const setUserProfile = (profileData) => ({type: SET_USER_PROFILE, profileData});
 
 export {
   addPostActionCreator,
   addMessageActionCreator,
-  toggleFollowUserAC,
-  setUsersAC,
-  setTotalUsersCountAC,
-  setCurrentPageAC,
-  toggleIsFetchingAC
+  toggleFollowUser,
+  setUsers,
+  setTotalUsersCount,
+  setCurrentPage,
+  toggleIsFetching,
+  setUserProfile
 };

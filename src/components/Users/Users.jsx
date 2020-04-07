@@ -1,10 +1,11 @@
 import React from 'react';
 import userPhoto from '../../../src/assets/images/user.png';
 import style from './Users.module.css';
+import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
   const {
-    toggleFollow,
+    toggleFollowUser,
     users,
     pageSize,
     totalUsersCount,
@@ -33,8 +34,10 @@ const Users = (props) => {
     return (
       <div className={style.user} key={id}>
         <div className={style.avatar}>
-          <img src={user.photos.small !== null ? user.photos.small : userPhoto } alt='ava'/>
-          <button onClick={() => toggleFollow(id)}>
+          <NavLink to={`/profile/${id}`}>
+            <img src={user.photos.small !== null ? user.photos.small : userPhoto } alt='ava'/>
+          </NavLink>
+          <button onClick={() => toggleFollowUser(id)}>
             {user.followed ? 'Unfollow' : 'Follow'}
           </button>
         </div>

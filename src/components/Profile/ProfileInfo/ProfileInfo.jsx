@@ -1,14 +1,19 @@
 import React from 'react';
 import style from './ProfileInfo.module.css';
+import { Loader } from '../../Common/Loader/Loader';
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ profile }) => {
+  if(!profile.hasOwnProperty('userId')) {
+    return <Loader />
+  }
+
   return (
     <div>
       <div>
-        <img className={style.image} src='https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80' />
+      <img className={style.image} alt='profile' src={profile.photos.small} /> 
       </div>
       <div className={style.description}>
-        ava + description
+        <h1>{profile.fullName}</h1>
       </div>
     </div>
   )

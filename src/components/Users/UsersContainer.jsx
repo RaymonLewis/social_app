@@ -1,5 +1,5 @@
 import React from 'react';
-import { toggleFollowUserAC, setUsersAC, setTotalUsersCountAC, setCurrentPageAC, toggleIsFetchingAC } from '../../redux/action_creators';
+import { toggleFollowUser, setUsers, setTotalUsersCount, setCurrentPage, toggleIsFetching } from '../../redux/action_creators';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Users from './Users';
@@ -44,7 +44,7 @@ class UsersContainer extends React.Component {
 
   render() {
     const {
-      toggleFollow,
+      toggleFollowUser,
       totalUsersCount,
       currentPage,
       users,
@@ -56,7 +56,7 @@ class UsersContainer extends React.Component {
       <>
         {isFetching ? <Loader /> : null}
         <Users 
-        toggleFollow={toggleFollow}
+        toggleFollowUser={toggleFollowUser}
         totalUsersCount={totalUsersCount}
         currentPage={currentPage}
         users={users} 
@@ -74,14 +74,22 @@ const mapStateToProps = (state) => ({
   currentPage: state.usersPageData.currentPage,
   isFetching: state.usersPageData.isFetching
 });
-
-const mapDispatchToProps = (dispatch) => ({
+//Functional way. Too much boilprate code. We can use bindActionCreator injected in connect and just pass action creator
+/*const mapDispatchToProps = (dispatch) => ({
   toggleFollow: (userID) => dispatch(toggleFollowUserAC(userID)),
   setUsers: (users) => dispatch(setUsersAC(users)),
   setCurrentPage: (pageNumber) => dispatch(setCurrentPageAC(pageNumber)),
   setTotalUsersCount: (numOfUsers) => dispatch(setTotalUsersCountAC(numOfUsers)),
   toggleIsFetching: (isFetching) => dispatch(toggleIsFetchingAC(isFetching))
-});
+});*/
+
+const mapDispatchToProps = {
+  toggleFollowUser,
+  setUsers,
+  setCurrentPage,
+  setTotalUsersCount,
+  toggleIsFetching
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(UsersContainer);
 

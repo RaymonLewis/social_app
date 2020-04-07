@@ -4,10 +4,10 @@ import PostsContainer from './Posts/PostsContainer';
 
 import style from './Profile.module.css';
 
-const Profile = () => {
+const Profile = ({ profile }) => {
   return(
     <div>
-      <ProfileInfo />
+      <ProfileInfo profile={profile} />
       <PostsContainer />
     </div>
   );
