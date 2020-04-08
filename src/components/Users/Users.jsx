@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
   const {
-    toggleFollowUser,
+    toggleFollow,
     users,
     pageSize,
     totalUsersCount,
@@ -37,7 +37,7 @@ const Users = (props) => {
           <NavLink to={`/profile/${id}`}>
             <img src={user.photos.small !== null ? user.photos.small : userPhoto } alt='ava'/>
           </NavLink>
-          <button onClick={() => toggleFollowUser(id)}>
+          <button onClick={() => toggleFollow(id)}>
             {user.followed ? 'Unfollow' : 'Follow'}
           </button>
         </div>

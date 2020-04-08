@@ -1,12 +1,17 @@
 import React from 'react';
-import { header, image } from './Header.module.css';
+import style from './Header.module.css';
+import { NavLink } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ isAuth,login }) => {
   return(
-    <header className={header}>
-      <img className={image} 
-      src='https://cdn.shopify.com/shopifycloud/hatchful-web/assets/6fcc76cfd1c59f44d43a485167fb3139.png' 
+    <header className={style.header}>
+      <img className={style.imageimage} 
+      src='https://cdn.shopify.com/shopifycloud/hatchful-web/assets/6fcc76cfd1c59f44d43a485167fb3139.png'
+      alt='logo' 
       />
+      <div className={style.loginBlock}>
+        {isAuth ? <h1>{login}</h1> : <NavLink to={'/login'}>Login</NavLink>}
+      </div>
     </header>
   );
 }

@@ -6,7 +6,8 @@ import {
   SET_TOTAL_USERS_COUNT,
   SET_CURRENT_PAGE,
   TOGGLE_IS_FETCHING,
-  SET_USER_PROFILE 
+  SET_USER_PROFILE,
+  SET_USER_DATA
 } from "./action_types";
 
 /**
@@ -38,6 +39,7 @@ const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, t
 const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber});
 const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
 const setUserProfile = (profileData) => ({type: SET_USER_PROFILE, profileData});
+const setAuthUserData = (userData) => ({type: SET_USER_DATA, userData});
 
 export {
   addPostActionCreator,
@@ -47,5 +49,6 @@ export {
   setTotalUsersCount,
   setCurrentPage,
   toggleIsFetching,
-  setUserProfile
+  setUserProfile,
+  setAuthUserData
 };

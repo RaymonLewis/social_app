@@ -13,7 +13,7 @@ class UsersContainer extends React.Component {
   fetchUsers = () => {
     this.props.toggleIsFetching(true);
     const url = `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`;
-    axios.get(url)
+    axios.get(url, {withCredentials: true})
       .then(response => {
         this.props.toggleIsFetching(false); 
         const usersData = response.data.items;
@@ -30,7 +30,7 @@ class UsersContainer extends React.Component {
     this.props.setCurrentPage(pageNumber);
     this.props.toggleIsFetching(true);
     const url = `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`;
-    axios.get(url)
+    axios.get(url, {withCredentials: true})
       .then(response => {
         this.props.toggleIsFetching(false); 
         const usersData = response.data.items; 
@@ -42,9 +42,51 @@ class UsersContainer extends React.Component {
       })
   };
 
+  toggleFollow(userID) {
+    const url = `https://social-network.samuraijs.com/api/1.0/follow/${userID}`;
+    axios.get(url,{withCredentials: true})
+      .then(response => {
+        const isFollowed = response.data;
+        if(!isFollowed) {
+          axios.post(url, {}, {
+            withCredentials: true,
+            headers: {
+              "API-KEY": 'e7028849-7b36-4fb7-b2c1-dd0b4e473e8a'
+            }
+          })
+            .then(response => {
+              if(response.data.resultCode === 0) {
+                console.log('changed');
+                this.props.toggleFollowUser(userID);
+              }
+            })
+          .catch(error => {
+            console.log(error);
+          });
+        } else {
+          axios.delete(url, {
+            withCredentials: true,
+            headers: {
+              "API-KEY": 'e7028849-7b36-4fb7-b2c1-dd0b4e473e8a'
+            }
+          })
+          .then(response => {
+            console.log(response);
+            console.log('changed');
+            this.props.toggleFollowUser(userID);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
+
   render() {
     const {
-      toggleFollowUser,
       totalUsersCount,
       currentPage,
       users,
@@ -56,7 +98,7 @@ class UsersContainer extends React.Component {
       <>
         {isFetching ? <Loader /> : null}
         <Users 
-        toggleFollowUser={toggleFollowUser}
+        toggleFollow={this.toggleFollow.bind(this)}
         totalUsersCount={totalUsersCount}
         currentPage={currentPage}
         users={users} 
