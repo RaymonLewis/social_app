@@ -3,7 +3,8 @@ import {
   SET_USERS, 
   SET_TOTAL_USERS_COUNT, 
   SET_CURRENT_PAGE, 
-  TOGGLE_IS_FETCHING 
+  TOGGLE_IS_FETCHING,
+  TOGGLE_FOLLOW_IN_PROGRESS
 } from "./action_types";
 
 const usersPageData = {
@@ -11,7 +12,8 @@ const usersPageData = {
   pageSize: 5,
   totalUsersCount: 0,
   currentPage: 1,
-  isFetching: true
+  isFetching: true,
+  followingInProgress: []
 };
  
 const usersReducer = (state = usersPageData, action) => {
@@ -44,6 +46,14 @@ const usersReducer = (state = usersPageData, action) => {
       return {
         ...state,
         isFetching: action.isFetching
+      }
+    case TOGGLE_FOLLOW_IN_PROGRESS:
+      const {isFetching, selectedID} = action.payload
+      const {followingInProgress} = state
+      return {
+        ...state,
+        followingInProgress: isFetching ? 
+        [...followingInProgress, selectedID] : [followingInProgress.filter(id => id !== selectedID)]
       }
     default:
       return state;

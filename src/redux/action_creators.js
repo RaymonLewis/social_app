@@ -7,7 +7,8 @@ import {
   SET_CURRENT_PAGE,
   TOGGLE_IS_FETCHING,
   SET_USER_PROFILE,
-  SET_USER_DATA
+  SET_USER_DATA,
+  TOGGLE_FOLLOW_IN_PROGRESS
 } from "./action_types";
 
 /**
@@ -40,6 +41,10 @@ const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber: pag
 const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
 const setUserProfile = (profileData) => ({type: SET_USER_PROFILE, profileData});
 const setAuthUserData = (userData) => ({type: SET_USER_DATA, userData});
+const setToggleFollowInProgress = (isFetching, selectedID) => ({type: TOGGLE_FOLLOW_IN_PROGRESS, payload: {
+  isFetching: isFetching,
+  selectedID: selectedID
+}});
 
 export {
   addPostActionCreator,
@@ -50,5 +55,6 @@ export {
   setCurrentPage,
   toggleIsFetching,
   setUserProfile,
-  setAuthUserData
+  setAuthUserData,
+  setToggleFollowInProgress
 };

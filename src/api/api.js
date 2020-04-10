@@ -21,12 +21,13 @@ export const usersAPI = {
         if(isFollowed) {
           return Axios.delete(url)
             .then(response => {
-              return response.resultCode;
+              return response.data.resultCode;
             });
         } else {
           return Axios.post(url)
             .then(response => {
-              return response.resultCode;
+              console.log(response.data.resultCode)
+              return response.data.resultCode;
             });
         }
       })

@@ -1,7 +1,12 @@
 import React from 'react';
-import { toggleFollowUser, setUsers, setTotalUsersCount, setCurrentPage, toggleIsFetching } from '../../redux/action_creators';
+import { 
+  toggleFollowUser, 
+  setUsers, 
+  setTotalUsersCount, 
+  setCurrentPage, 
+  toggleIsFetching,
+  setToggleFollowInProgress } from '../../redux/action_creators';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import Users from './Users';
 import { Loader } from '../Common/Loader/Loader';
 import { usersAPI } from '../../api/api';
@@ -42,9 +47,12 @@ class UsersContainer extends React.Component {
   };
 
   onToggleFollow(userID) {
+    console.log(userID);
+    this.props.setToggleFollowInProgress(true,userID);
     usersAPI.toggleFollowUser(userID)
       .then(resultCode => {
         if(resultCode === 0) {
+          this.props.setToggleFollowInProgress(false,userID);
           this.props.toggleFollowUser(userID);
         }
       });
@@ -56,14 +64,16 @@ class UsersContainer extends React.Component {
       currentPage,
       users,
       pageSize,
-      isFetching
+      isFetching,
+      followingInProgress,
     } = this.props;
 
     return (
       <>
         {isFetching ? <Loader /> : null}
         <Users 
-        toggleFollow={this.onToggleFollow.bind(this)}
+        onToggleFollow={this.onToggleFollow.bind(this)}
+        followingInProgress = {followingInProgress}
         totalUsersCount={totalUsersCount}
         currentPage={currentPage}
         users={users} 
@@ -79,23 +89,18 @@ const mapStateToProps = (state) => ({
   pageSize: state.usersPageData.pageSize,
   totalUsersCount: state.usersPageData.totalUsersCount,
   currentPage: state.usersPageData.currentPage,
-  isFetching: state.usersPageData.isFetching
+  isFetching: state.usersPageData.isFetching,
+  followingInProgress: state.usersPageData.followingInProgress,
+  selectedID: state.usersPageData.selectedID
 });
-//Functional way. Too much boilprate code. We can use bindActionCreator injected in connect and just pass action creator
-/*const mapDispatchToProps = (dispatch) => ({
-  toggleFollow: (userID) => dispatch(toggleFollowUserAC(userID)),
-  setUsers: (users) => dispatch(setUsersAC(users)),
-  setCurrentPage: (pageNumber) => dispatch(setCurrentPageAC(pageNumber)),
-  setTotalUsersCount: (numOfUsers) => dispatch(setTotalUsersCountAC(numOfUsers)),
-  toggleIsFetching: (isFetching) => dispatch(toggleIsFetchingAC(isFetching))
-});*/
 
 const mapDispatchToProps = {
   toggleFollowUser,
   setUsers,
   setCurrentPage,
   setTotalUsersCount,
-  toggleIsFetching
+  toggleIsFetching,
+  setToggleFollowInProgress
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(UsersContainer);

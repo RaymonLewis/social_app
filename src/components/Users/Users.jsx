@@ -5,12 +5,13 @@ import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
   const {
-    toggleFollow,
+    onToggleFollow,
     users,
     pageSize,
     totalUsersCount,
     currentPage,
-    onPageChange
+    onPageChange,
+    followingInProgress
   } = props;
 
   const numberOfPages = Math.ceil(totalUsersCount/pageSize)/50;
@@ -37,7 +38,7 @@ const Users = (props) => {
           <NavLink to={`/profile/${id}`}>
             <img src={user.photos.small !== null ? user.photos.small : userPhoto } alt='ava'/>
           </NavLink>
-          <button onClick={() => toggleFollow(id)}>
+          <button disabled ={followingInProgress.some(userID => userID === id)} onClick={() => onToggleFollow(id)}>
             {user.followed ? 'Unfollow' : 'Follow'}
           </button>
         </div>
