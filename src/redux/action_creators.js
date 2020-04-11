@@ -7,7 +7,7 @@ import {
   SET_CURRENT_PAGE,
   TOGGLE_IS_FETCHING,
   SET_USER_PROFILE,
-  SET_USER_DATA,
+  SET_AUTH_USER_DATA,
   TOGGLE_FOLLOW_IN_PROGRESS
 } from "./action_types";
 
@@ -40,7 +40,7 @@ const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, t
 const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber});
 const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
 const setUserProfile = (profileData) => ({type: SET_USER_PROFILE, profileData});
-const setAuthUserData = (userData) => ({type: SET_USER_DATA, userData});
+const setAuthUserData = (userData) => ({type: SET_AUTH_USER_DATA, userData});
 const setToggleFollowInProgress = (isFetching, selectedID) => ({type: TOGGLE_FOLLOW_IN_PROGRESS, payload: {
   isFetching: isFetching,
   selectedID: selectedID

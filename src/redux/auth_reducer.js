@@ -1,5 +1,4 @@
-import { SET_USER_DATA } from "./action_types";
-
+import { SET_AUTH_USER_DATA } from "./action_types";
 
 const initialState = {
   id: null,
@@ -10,7 +9,7 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch(action.type) {
-    case SET_USER_DATA:
+    case SET_AUTH_USER_DATA:
       return {
         ...state,
         ...action.userData,

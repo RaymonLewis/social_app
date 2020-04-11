@@ -3,8 +3,10 @@ import {
   setUsers, 
   setTotalUsersCount, 
   setToggleFollowInProgress,
-  toggleFollowUser } from "../action_creators";
-import { usersAPI } from '../../api/api';
+  toggleFollowUser,
+  setUserProfile,
+  setAuthUserData } from "../action_creators";
+import { usersAPI, authAPI } from '../../api/api';
 
 export const getUsers = (currentPage, pageSize) => (dispatch, getState) => {
   dispatch(toggleIsFetching(true));
@@ -31,3 +33,17 @@ export const toggleFollow = (userID) => (dispatch) => {
         };
       });
 };
+
+export const getProfile = (userID) => (dispatch) => {
+  usersAPI.getProfile(userID)
+    .then(userData => {
+      dispatch(setUserProfile(userData));
+    });
+}
+
+export const getAuthData = () => (dispatch) => {
+  authAPI.getAuthData()
+    .then(authUserData => {
+      dispatch(setAuthUserData(authUserData));
+    })
+}

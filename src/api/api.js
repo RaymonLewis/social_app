@@ -9,12 +9,12 @@ const Axios = axios.create({
 });
 
 export const usersAPI = {
-  getUsers(currentPage, pageSize) {
+  getUsers: (currentPage, pageSize) => {
     const url = `users?page=${currentPage}&count=${pageSize}`;
       return Axios.get(url)
               .then(response => response.data);
   },
-  toggleFollowUser(userID) {
+  toggleFollowUser: (userID) => {
     const url = `/follow/${userID}`;
     return this._getIsUserFollowed(userID)
       .then(isFollowed => {
@@ -32,10 +32,29 @@ export const usersAPI = {
         }
       })
   },
-  _getIsUserFollowed(userID) {
-    const url = `/follow/${userID}`;
+  _getIsUserFollowed: (userID) => {
+    const url = `follow/${userID}`;
     return Axios.get(url)
             .then(response => response.data)
             .catch(error => console.log(error));
-  }
+  },
+  getProfile: (userID) => {
+    const url = `profile/${userID}`;
+    return Axios.get(url)
+      .then(response => response.data)
+      .catch(error => console.log(error))
+  } 
 }
+
+export const authAPI = {
+  getAuthData: () => {
+    const url = 'auth/me';
+    return Axios.get(url)
+            .then(response => {
+              if(response.data.resultCode === 0) {
+                return response.data.data
+              }
+            })
+            .catch(error => console.log(error))
+  }
+};
