@@ -43,7 +43,10 @@ export const getProfile = (userID) => (dispatch) => {
 
 export const getAuthData = () => (dispatch) => {
   authAPI.getAuthData()
-    .then(authUserData => {
-      dispatch(setAuthUserData(authUserData));
+    .then(response => {
+      if(response.resultCode === 0) {
+        const authUserData = response.data;
+        dispatch(setAuthUserData(authUserData));
+      }
     })
 }

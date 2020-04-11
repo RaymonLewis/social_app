@@ -26,7 +26,6 @@ export const usersAPI = {
         } else {
           return Axios.post(url)
             .then(response => {
-              console.log(response.data.resultCode)
               return response.data.resultCode;
             });
         }
@@ -50,11 +49,7 @@ export const authAPI = {
   getAuthData: () => {
     const url = 'auth/me';
     return Axios.get(url)
-            .then(response => {
-              if(response.data.resultCode === 0) {
-                return response.data.data
-              }
-            })
+            .then(response => response.data)
             .catch(error => console.log(error))
   }
 };
