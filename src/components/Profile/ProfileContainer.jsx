@@ -3,7 +3,8 @@ import Profile from './Profile';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { getProfile } from '../../redux/thunks/thunks';
-
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
   constructor(props){
@@ -23,10 +24,9 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    const profile = this.props.profile
     return (
       <div>
-        <Profile profile={profile} />
+        <Profile profile={this.props.profile} />
       </div>
     );
   };
@@ -38,8 +38,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getProfile
-}
+};
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ProfileContainer)
-);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
+  withAuthRedirect
+)(ProfileContainer);
+  

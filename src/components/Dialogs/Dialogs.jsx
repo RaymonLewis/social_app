@@ -1,11 +1,14 @@
 import React from 'react';
 import Message from './Message/Message';
 import Dialog from './Dialog/Dialog';
-
+import { Redirect } from 'react-router';
 import style from './Dialogs.module.css';
 
-const Dialogs = ({ addMessage, dialogsData, messagesData }) =>  {
-  console.log(addMessage);
+
+const Dialogs = ({ addMessage, dialogsData, messagesData, isAuth }) =>  {
+  if (!isAuth) {
+    return <Redirect to='/login' />
+  }
   const dialogList = dialogsData.map(({ id, name }) => {
     return (
       <Dialog id={id} name={name} key={id} />

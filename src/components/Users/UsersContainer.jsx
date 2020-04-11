@@ -4,6 +4,8 @@ import { setCurrentPage } from '../../redux/action_creators';
 import { getUsers, toggleFollow } from '../../redux/thunks/thunks';
 import { Loader } from '../Common/Loader/Loader';
 import Users from './Users';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 class UsersContainer extends React.Component {
   componentDidMount(){
@@ -54,5 +56,7 @@ const mapDispatchToProps = {
   toggleFollow
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(UsersContainer);
-
+export default compose(
+  connect(mapStateToProps,mapDispatchToProps),
+  withAuthRedirect
+)(UsersContainer);

@@ -2,7 +2,8 @@ import React from 'react';
 import style from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 
-const Header = ({ isAuth,login }) => {
+const Header = ({ isAuth,login, email }) => {
+  console.log(login, email);
   return(
     <header className={style.header}>
       <img className={style.imageimage} 
@@ -10,7 +11,12 @@ const Header = ({ isAuth,login }) => {
       alt='logo' 
       />
       <div className={style.loginBlock}>
-        {isAuth ? <h1>{login}</h1> : <NavLink to={'/login'}>Login</NavLink>}
+        {isAuth ? (
+          <>
+            <h1>{login} </h1>
+            <h1>{email}</h1>
+          </>
+        )   : <NavLink to={'/login'}>Login</NavLink>}
       </div>
     </header>
   );
